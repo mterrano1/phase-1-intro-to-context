@@ -12,5 +12,16 @@ function createEmployeeRecord(array){
 }
 
 function createEmployeeRecords(arrays){
-    arrays.map(createEmployeeRecord)
+    const employeeData = arrays.map(createEmployeeRecord)
+    return employeeData
+}
+
+function createTimeInEvent(object, dateStamp){
+    const timeObj = {
+    type: 'TimeIn',
+    hour: dateStamp.slice(11, 15),
+    date: dateStamp.slice(0, 10)
+}
+object.timeInEvents.push(timeObj)
+return object
 }
