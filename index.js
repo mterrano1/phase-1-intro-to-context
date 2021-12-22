@@ -52,13 +52,19 @@ function wagesEarnedOnDate(object, date){
 }
 
 function allWagesFor(object){
-    let allTimeInDates = object.timeInEvents.map(findDates => findDates.date);
-    let allTimeOutDates = object.timeOutEvents.map(findDates => findDates.date);
+    let findDates = object.timeInEvents.map(findDates => findDates.date);
+    let getHours = findDates.map(date => wagesEarnedOnDate(object, date));
+    const sum = (a, b) => (a + b) / 100;
+    let totalHours = getHours.reduce(sum);
+    return totalHours * object.payPerHour
+}
 
-
-    allTimeInDates.forEach(date => wagesEarnedOnDate(object, date))
-
-
-//     console.log(allTimeInDates)
-//     console.log(allTimeOutDates)
+function calculatePayroll(objects){
+    objects.map(object => {
+        let findDates = object.timeInEvents.map(findDates => findDates.date);
+        findDates.forEach(date => {
+            let totalWages = wagesEarnedOnDate(object, date)
+            console.log(totalWages)
+        })
+    })
 }
